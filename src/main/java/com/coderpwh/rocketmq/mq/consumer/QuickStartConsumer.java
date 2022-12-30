@@ -19,7 +19,7 @@ public class QuickStartConsumer {
     private static Logger logger = LoggerFactory.getLogger(QuickStartConsumer.class);
 
     public static final String CONSUMER_GROUP = "please_rename_unique_group_name_4";
-    public static final String DEFAULT_NAMESRVADDR = "127.0.0.1:9876";
+    public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
     public static final String TOPIC = "TopicTest";
 
 
