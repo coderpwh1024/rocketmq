@@ -6,11 +6,14 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author coderpwh
  * @date 2022/12/29 10:42
  */
+@Component
 public class QuickStartProducer {
 
 
@@ -24,10 +27,12 @@ public class QuickStartProducer {
     public static final String TAG = "TagA";
 
 
-    public static void send() throws InterruptedException {
+    public  void send() throws InterruptedException {
         DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
+            producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             producer.start();
+
             for (int i = 0; i < MESSAGE_COUNT; i++) {
                 String str = "Hello RocketMQ" + i;
                 Message msg = new Message(TOPIC, TAG, str.getBytes(RemotingHelper.DEFAULT_CHARSET));

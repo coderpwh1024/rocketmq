@@ -1,17 +1,18 @@
 package com.coderpwh.rocketmq.mq.consumer;
 
-import com.coderpwh.rocketmq.mq.producer.QuickStartProducer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * @author coderpwh
  * @date 2022/12/30 11:08
  */
+@Component
 public class QuickStartConsumer {
 
 
@@ -25,6 +26,7 @@ public class QuickStartConsumer {
     public void consumer() {
         try {
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
+            consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
             consumer.subscribe(TOPIC, "*");
             consumer.registerMessageListener((MessageListenerConcurrently) (msg, context) -> {
