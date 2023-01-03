@@ -20,7 +20,7 @@ public class QuickStartConsumer {
 
     public static final String CONSUMER_GROUP = "please_rename_unique_group_name_4";
     public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
-    public static final String TOPIC = "TopicTest";
+    public static final String TOPIC = "TestTopic";
 
 
     public void consumer() {
