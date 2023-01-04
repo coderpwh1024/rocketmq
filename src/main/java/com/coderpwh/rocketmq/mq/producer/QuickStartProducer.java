@@ -20,10 +20,10 @@ public class QuickStartProducer {
     private static Logger logger = LoggerFactory.getLogger(QuickStartProducer.class);
 
 
-    public static final int MESSAGE_COUNT = 1000;
+    public static final int MESSAGE_COUNT = 10;
     public static final String PRODUCER_GROUP = "please_rename_unique_group_name";
     public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
-    public static final String TOPIC = "TestTopic";
+    public static final String TOPIC = "TopicTest";
     public static final String TAG = "TagA";
 
 
@@ -31,6 +31,8 @@ public class QuickStartProducer {
         DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+            producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+            producer.setSendMsgTimeout(60000);
             producer.start();
 
             for (int i = 0; i < MESSAGE_COUNT; i++) {
