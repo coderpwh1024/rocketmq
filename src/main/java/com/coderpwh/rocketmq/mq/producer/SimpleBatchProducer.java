@@ -30,6 +30,9 @@ public class SimpleBatchProducer {
     public static void main(String[] args) {
         try {
             DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
+            producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+            producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+            producer.setSendMsgTimeout(60000);
             producer.start();
             List<Message> messages = new ArrayList<>();
             messages.add(new Message(TOPIC, TAG, "OrderID001", "Hello world 0".getBytes(StandardCharsets.UTF_8)));
