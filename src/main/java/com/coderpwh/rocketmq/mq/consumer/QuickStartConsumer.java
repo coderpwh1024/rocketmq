@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @author coderpwh
  * @date 2022/12/30 11:08
  */
-@Component
 public class QuickStartConsumer {
 
 
@@ -23,7 +22,7 @@ public class QuickStartConsumer {
     public static final String TOPIC = "TopicTest";
 
 
-    public void consumer() {
+    public static void consumer() {
         try {
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
             consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
@@ -38,6 +37,10 @@ public class QuickStartConsumer {
         } catch (Exception e) {
             logger.error("方法[consumer]异常信息为:{}", e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        consumer();
     }
 
 }
