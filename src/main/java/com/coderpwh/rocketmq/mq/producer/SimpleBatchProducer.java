@@ -39,7 +39,6 @@ public class SimpleBatchProducer {
             messages.add(new Message(TOPIC, TAG, "OrderID002", "Hello world 1".getBytes(StandardCharsets.UTF_8)));
             messages.add(new Message(TOPIC, TAG, "OrderID003", "Hello world 2".getBytes(StandardCharsets.UTF_8)));
             messages.add(new Message(TOPIC, TAG, "OrderID004", "Hello world 3".getBytes(StandardCharsets.UTF_8)));
-
             SendResult sendResult = producer.send(messages);
             logger.info("批量发送mq消息结果为:{}", sendResult);
         } catch (Exception e) {
