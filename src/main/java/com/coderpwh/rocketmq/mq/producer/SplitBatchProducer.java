@@ -20,18 +20,20 @@ public class SplitBatchProducer {
 
     public static final String PRODUCER_GROUP = "BatchProducerGroupName";
 
-    public static final String DEFAULT_NAMESRVADDR = "";
+    public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
 
     public static final int MESSAGE_COUNT = 100 * 1000;
 
     public static final String TOPIC = "BatchTest";
 
-    public static final String TAG = "Tag";
+    public static final String TAG = "TagA";
 
     public static void main(String[] args) {
-
+        DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
-            DefaultMQProducer producer = new DefaultMQProducer();
+            producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+            producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+            producer.setSendMsgTimeout(60000);
             producer.start();
 
             List<Message> messages = new ArrayList<>(MESSAGE_COUNT);
@@ -46,9 +48,9 @@ public class SplitBatchProducer {
                 logger.info("批量发送mq消息，发送结果为:{}", sendResult);
             }
         } catch (Exception e) {
-            logger.error("批量发送mq消息异常,异常信息为:{}",e.getMessage());
-
+            logger.error("批量发送mq消息异常,异常信息为:{}", e.getMessage());
         }
+        producer.shutdown();
     }
 
 
