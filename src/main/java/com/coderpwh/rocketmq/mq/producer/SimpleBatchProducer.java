@@ -24,12 +24,12 @@ public class SimpleBatchProducer {
 
     public static final String TOPIC = "BatchTest";
 
-    public static final String TAG = "Tag";
+    public static final String TAG = "TagA";
 
 
     public static void main(String[] args) {
+        DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
-            DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
             producer.setSendMsgTimeout(60000);
@@ -44,7 +44,7 @@ public class SimpleBatchProducer {
         } catch (Exception e) {
             logger.error("批量发送mq消息异常,异常消息为:{}", e.getMessage());
         }
-
+        producer.shutdown();
     }
 
 }
