@@ -33,7 +33,7 @@ public class SendServiceImpl implements SendService {
         try {
             logger.info("已经进入quickStart方法中，准备发送发送mq消息");
             producer.send();
-            logger.info("已经进入quickStart方法中，mq发送消息异常");
+            logger.info("已经进入quickStart方法中，mq发送消息完毕");
         } catch (Exception e) {
             logger.error("quickStart发送mq消息异常，异常信息为:{}", e.getMessage());
         }

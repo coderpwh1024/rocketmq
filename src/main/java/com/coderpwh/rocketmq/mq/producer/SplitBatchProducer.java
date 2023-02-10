@@ -32,7 +32,8 @@ public class SplitBatchProducer {
         DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
-            producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+             //  TBW102 AUTO_CREATE_TOPIC_KEY
+            producer.setCreateTopicKey("TBW102");
             producer.setSendMsgTimeout(60000);
             producer.start();
 

@@ -31,7 +31,7 @@ public class SimpleBatchProducer {
         DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
         try {
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
-            producer.setCreateTopicKey("AUTO_CREATE_TOPIC_KEY");
+            producer.setCreateTopicKey("TBW102");
             producer.setSendMsgTimeout(60000);
             producer.start();
             List<Message> messages = new ArrayList<>();
