@@ -42,8 +42,6 @@ public class TimerMessageConsumer {
             logger.error("延时队列消费端异常,异常消息为:{}", e.getMessage());
         }
     }
-
-
     public static void main(String[] args) {
         consumer();
     }

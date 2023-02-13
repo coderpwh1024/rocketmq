@@ -40,7 +40,7 @@ public class TimerMessageProducer {
 
             for (int i = 0; i < totalMessageToSend; i++) {
                 Message message = new Message(TOPIC, ("Hello scheduled message" + i).getBytes(StandardCharsets.UTF_8));
-                message.setDelayTimeLevel(10);
+                message.setDelayTimeLevel(3);
                 SendResult result = producer.send(message);
                 logger.info("延时队列发送结果为:{}", JSON.toJSONString(result));
             }
