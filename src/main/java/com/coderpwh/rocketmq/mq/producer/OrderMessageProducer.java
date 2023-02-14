@@ -9,6 +9,7 @@ import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public class OrderMessageProducer {
             producer.setSendMsgTimeout(60000);
             producer.start();
 
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 int orderId = i % 10;
 
                 Message msg = new Message(TOPIC, tags[i % tags.length], "KEY" + i, ("Hello RocketMQ" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));

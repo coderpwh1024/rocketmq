@@ -1,5 +1,6 @@
 package com.coderpwh.rocketmq.mq.consumer;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
@@ -21,7 +22,7 @@ public class OrderMessageConsumer {
 
     private static Logger logger = LoggerFactory.getLogger(OrderMessageConsumer.class);
 
-    public static final String CONSUMER_GROUP = "please_rename_unique_group_name_3";
+    public static final String CONSUMER_GROUP = "please_rename_unique_group_name";
     public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
     public static final String TOPIC = "TopicTestjjj";
 
@@ -30,15 +31,14 @@ public class OrderMessageConsumer {
         try {
             consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            consumer.subscribe(TOPIC, "TagA||TagC||TagD");
-
+            consumer.subscribe(TOPIC, "TagA || TagC || TagD");
             consumer.registerMessageListener(new MessageListenerOrderly() {
                 AtomicLong consumeTimes = new AtomicLong(0);
 
                 @Override
                 public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
                     consumeOrderlyContext.setAutoCommit(true);
-
+                    logger.info("Receive new Message ,线程名为:{},消息为：{}", Thread.currentThread().getName(), list);
                     this.consumeTimes.incrementAndGet();
                     if ((this.consumeTimes.get() % 2) == 0) {
                         return ConsumeOrderlyStatus.SUCCESS;
