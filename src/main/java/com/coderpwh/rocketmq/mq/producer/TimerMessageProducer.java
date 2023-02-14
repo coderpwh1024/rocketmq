@@ -4,14 +4,9 @@ import com.alibaba.fastjson.JSON;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.nio.charset.StandardCharsets;
-
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author coderpwh
