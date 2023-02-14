@@ -44,10 +44,8 @@ public class ScheduledMessageConsumer {
         }
     }
 
-
     public static void main(String[] args) {
-
-
+        consumer();
     }
 
 
