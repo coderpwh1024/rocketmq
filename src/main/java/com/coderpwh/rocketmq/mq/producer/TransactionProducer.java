@@ -1,6 +1,7 @@
 package com.coderpwh.rocketmq.mq.producer;
 
 import com.alibaba.fastjson.JSON;
+import com.coderpwh.rocketmq.mq.consumer.TransactionListenerImpl;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
@@ -36,6 +37,8 @@ public class TransactionProducer {
 
         try {
 
+            TransactionListenerImpl listener = new TransactionListenerImpl();
+
             TransactionMQProducer producer = new TransactionMQProducer(PRODUCER_GROUP);
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             producer.setCreateTopicKey("TBW102");
@@ -48,7 +51,7 @@ public class TransactionProducer {
             });
 
             producer.setExecutorService(executorService);
-//            producer.setTransactionListener();
+            producer.setTransactionListener(listener);
             producer.start();
 
             for (int i = 0; i < MESSAGE_COUNT; i++) {
