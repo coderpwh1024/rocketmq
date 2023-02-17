@@ -32,7 +32,7 @@ public class TagFilterProducer {
             producer.setSendMsgTimeout(60000);
             producer.start();
 
-            for (int i = 0; i < 60; i++) {
+            for (int i = 0; i < 10; i++) {
                 Message msg = new Message(TOPIC, tags[i % tags.length], "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
                 SendResult sendResult = producer.send(msg);
                 logger.info("发送结果为:{}", JSON.toJSONString(sendResult));
