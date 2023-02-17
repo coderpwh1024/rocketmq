@@ -30,6 +30,7 @@ public class TagFilterProducer {
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             producer.setCreateTopicKey("TBW102");
             producer.setSendMsgTimeout(60000);
+            producer.start();
 
             for (int i = 0; i < 60; i++) {
                 Message msg = new Message(TOPIC, tags[i % tags.length], "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
