@@ -27,6 +27,7 @@ public class PushConsumer {
 
         try {
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
+            consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
             consumer.setMessageModel(MessageModel.BROADCASTING);
             consumer.subscribe(TOPIC, SUB_EXPRESSION);
@@ -35,6 +36,7 @@ public class PushConsumer {
                 logger.info("Receive new Message 线程名:{},消息体:{}", Thread.currentThread().getName(), msg);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
+            consumer.start();
         } catch (Exception e) {
             logger.error("消费异常,异常消息为:{}", e.getMessage());
         }
