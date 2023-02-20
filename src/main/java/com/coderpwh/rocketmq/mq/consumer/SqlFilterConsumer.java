@@ -32,8 +32,11 @@ public class SqlFilterConsumer {
             consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
-            consumer.subscribe(TOPIC, MessageSelector.bySql("(TAGS is not null and TAGS in ('TagA','TagB'))" + "and (a is not null and a between 0 and 3)"));
+//            consumer.subscribe(TOPIC, MessageSelector.bySql("(TAGS is not null and TAGS in ('TagA','TagB'))" + "and (a is not null and a between 0 and 3)"));
 
+            consumer.subscribe("SqlFilterTest",
+                    MessageSelector.bySql("(TAGS is not null and TAGS in ('TagA', 'TagB'))" +
+                            "and (a is not null and a between 0 and 3)"));
             consumer.registerMessageListener(new MessageListenerConcurrently() {
                 @Override
                 public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
