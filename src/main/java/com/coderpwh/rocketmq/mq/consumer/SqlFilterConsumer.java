@@ -5,6 +5,7 @@ import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,8 @@ public class SqlFilterConsumer {
     public static void consumer() {
         try {
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
+            consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+            consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
             consumer.subscribe(TOPIC, MessageSelector.bySql("(TAGS is not null and TAGS in ('TagA','TagB'))" + "and (a is not null and a between 0 and 3)"));
 
