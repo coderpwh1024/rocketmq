@@ -39,6 +39,7 @@ public class OpenTracingPushConsumer {
                 logger.info("Receive new Messages: 线程名:{},消息体:{}", Thread.currentThread().getName(), msg);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });
+            consumer.start();
         } catch (Exception e) {
             logger.error("消费端异常,异常信息为:{}", e.getMessage());
         }

@@ -43,6 +43,9 @@ public class OpenTracingTransactionProducer {
         try {
             Tracer tracer = initTracer();
             TransactionMQProducer producer = new TransactionMQProducer(PRODUCER_GROUP);
+            producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+            producer.setCreateTopicKey("TBW102");
+            producer.setSendMsgTimeout(60000);
             producer.getDefaultMQProducerImpl().registerSendMessageHook(new SendMessageOpenTracingHookImpl(tracer));
             producer.getDefaultMQProducerImpl().registerEndTransactionHook(new EndTransactionOpenTracingHookImpl(tracer));
 
