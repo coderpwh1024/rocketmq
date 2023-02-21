@@ -31,7 +31,7 @@ public class TraceProducer {
 
         try {
 
-            DefaultMQProducer producer = new DefaultMQProducer();
+            DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
             producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             producer.setCreateTopicKey("TBW102");
             producer.setSendMsgTimeout(6000);

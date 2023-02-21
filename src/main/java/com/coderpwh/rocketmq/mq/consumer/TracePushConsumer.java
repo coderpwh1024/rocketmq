@@ -26,7 +26,7 @@ public class TracePushConsumer {
             DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
             consumer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            consumer.setConsumeTimestamp("");
+            consumer.setConsumeTimestamp("20230221221800");
             consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
                 logger.info("Receive New Messages,线程名:{},消息体:{}", Thread.currentThread().getName(), msgs);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
