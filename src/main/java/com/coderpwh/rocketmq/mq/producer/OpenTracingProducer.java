@@ -35,7 +35,6 @@ public class OpenTracingProducer {
 
     public static void main(String[] args) {
 
-
         try {
             Tracer tracer = initTracer();
 
