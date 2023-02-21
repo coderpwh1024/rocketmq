@@ -1,5 +1,10 @@
 package com.coderpwh.rocketmq.mq.producer;
 
+import io.jaegertracing.Configuration;
+import io.jaegertracing.internal.samplers.ConstSampler;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +30,26 @@ public class OpenTracingProducer {
 
     public static void main(String[] args) {
 
+        Tracer tracer = initTracer();
+
+        DefaultMQProducer producer = new DefaultMQProducer(PRODUCER_GROUP);
+        producer.setNamesrvAddr(DEFAULT_NAMESRVADDR);
+        producer.setCreateTopicKey("TBW102");
+        producer.setSendMsgTimeout(60000);
+
+
+    }
+
+
+    private static Tracer initTracer() {
+        Configuration.SamplerConfiguration samplerConfiguration = Configuration.SamplerConfiguration.fromEnv().withType(ConstSampler.TYPE).withParam(1);
+
+        Configuration.ReporterConfiguration reporterConfig = Configuration.ReporterConfiguration.fromEnv().withLogSpans(true);
+
+        Configuration config = new Configuration("rocketmq").withSampler(samplerConfiguration).withReporter(reporterConfig);
+
+        GlobalTracer.registerIfAbsent(config.getTracer());
+        return config.getTracer();
     }
 
 
