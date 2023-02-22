@@ -34,7 +34,7 @@ public class OpenTracingPushConsumer {
 
             consumer.subscribe(TOPIC, "*");
             consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-            consumer.setConsumeTimestamp("202302211600");
+            consumer.setConsumeTimestamp("20230223221800");
             consumer.registerMessageListener((MessageListenerConcurrently) (msg, context) -> {
                 logger.info("Receive new Messages: 线程名:{},消息体:{}", Thread.currentThread().getName(), msg);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
