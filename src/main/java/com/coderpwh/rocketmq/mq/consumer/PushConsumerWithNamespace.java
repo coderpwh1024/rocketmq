@@ -23,7 +23,6 @@ public class PushConsumerWithNamespace {
 
     public static final String TOPIC = "NAMESPACE_TOPIC";
 
-
     private static void consumer() {
 
         try {
@@ -39,7 +38,6 @@ public class PushConsumerWithNamespace {
             logger.error("异常消息为:{}", e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         consumer();
