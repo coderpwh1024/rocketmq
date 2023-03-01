@@ -14,11 +14,11 @@ public class RequestProducer {
     private static Logger logger = LoggerFactory.getLogger(RequestProducer.class);
 
     private static String producerGroup = "please_rename_unique_group_name";
+
     public static final String DEFAULT_NAMESRVADDR = "120.79.226.167:9876";
+
     public static final String TOPIC = "RequestTopic";
-
     private static Long tt1 = 3000L;
-
     public static void main(String[] args) {
         try {
             DefaultMQProducer producer = new DefaultMQProducer(producerGroup);
