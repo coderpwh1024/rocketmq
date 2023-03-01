@@ -1,7 +1,6 @@
 package com.coderpwh.rocketmq.mq.consumer;
 
 import com.alibaba.fastjson.JSON;
-import com.coderpwh.rocketmq.mq.producer.RequestProducer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
