@@ -1,13 +1,11 @@
 package com.coderpwh.rocketmq.service.impl;
 
-import com.coderpwh.rocketmq.mq.consumer.QuickStartConsumer;
 import com.coderpwh.rocketmq.mq.producer.QuickStartProducer;
 import com.coderpwh.rocketmq.service.SendService;
 import com.coderpwh.rocketmq.util.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 
 /**
