@@ -15,7 +15,10 @@
     <description>rocketmq</description>
     <properties>
         <java.version>1.8</java.version>
+        <rocketmq-spring-boot-starter-version>2.2.3-SNAPSHOT</rocketmq-spring-boot-starter-version>
     </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
