@@ -1,5 +1,6 @@
 package com.coderpwh.rocketmq.controller;
 
+import com.coderpwh.rocketmq.service.ProducerService;
 import com.coderpwh.rocketmq.service.SendService;
 import com.coderpwh.rocketmq.util.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,10 @@ public class SendMqController {
     private SendService sendService;
 
 
+    @Resource
+    private ProducerService producerService;
+
+
     /***
      *  mq简单示例
      * @return
@@ -28,6 +33,12 @@ public class SendMqController {
     @RequestMapping(value = "/quick_start", method = RequestMethod.GET)
     public Result quickStart() {
         return sendService.quickStart();
+    }
+
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public Result testProducer() {
+        return producerService.testProducer();
     }
 
 
