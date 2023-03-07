@@ -89,6 +89,10 @@ public class ProducerServiceImpl implements ProducerService {
 
         convertAndSendByMsgExtTopicTag1();
 
+        testBatchMessages();
+
+        testSendBatchMessageOrderly();
+
 
         return null;
     }
@@ -235,6 +239,29 @@ public class ProducerServiceImpl implements ProducerService {
         return Result.ok();
     }
 
+
+    /***
+     * 延时队列 testSendBatchMessageOrderly
+     * @return
+     */
+    public Result testSendBatchMessageOrderly() {
+
+        for (int q = 0; q < 4; q++) {
+            List<Message> msgs = new ArrayList<>();
+
+            for (int i = 0; i < 10; i++) {
+                int msgIndex = q * 10 + i;
+                String msg = String.format("Hello RocketMQ Batch Msg#%d to queue: %d", msgIndex, q);
+
+                Message<String> message = MessageBuilder.withPayload(msg).setHeader(RocketMQHeaders.KEYS, "KEY_" + msgIndex).build();
+                msgs.add(message);
+            }
+            SendResult sendResult = rocketMQTemplate.syncSendOrderly(springTopic, msgs, q + "", 60000);
+            logger.info("Batch messages orderly to queue:{},发送结果为:{}", sendResult.getMessageQueue().getQueueId(), JSON.toJSONString(sendResult));
+        }
+
+        return Result.ok();
+    }
 
 
 }
