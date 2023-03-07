@@ -112,6 +112,8 @@ public class ProducerServiceImpl implements ProducerService {
 
         testStringRequestTopicBySendAndReceive();
 
+        testObjectRequestTopicBySendAndReceive();
+
         return null;
     }
 
@@ -399,6 +401,26 @@ public class ProducerServiceImpl implements ProducerService {
                 logger.error("异常信息为:{}", throwable.getMessage());
             }
         });
+
+        return Result.ok();
+    }
+
+    public Result testObjectRequestTopicBySendAndReceive() {
+        User user = new User();
+        user.setUserAge(9);
+        user.setUserName("requestUserName");
+
+        rocketMQTemplate.sendAndReceive(objectRequestTopic, user, new RocketMQLocalRequestCallback<User>() {
+            @Override
+            public void onSuccess(User message) {
+                logger.info("接收与发送的消息为:{}", JSON.toJSONString(message));
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                logger.error("异常消息为:{}", throwable.getMessage());
+            }
+        }, 5000);
 
         return Result.ok();
     }
