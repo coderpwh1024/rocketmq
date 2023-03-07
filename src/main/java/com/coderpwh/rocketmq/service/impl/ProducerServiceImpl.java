@@ -80,6 +80,12 @@ public class ProducerServiceImpl implements ProducerService {
 
         testSpringTopicByWithpload();
 
+        asyncSend();
+
+        convertAndSendByMsgExtTopic();
+
+        convertAndSendByMsgExtTopicTag1();
+
 
         return null;
     }
@@ -97,6 +103,10 @@ public class ProducerServiceImpl implements ProducerService {
     }
 
 
+    /***
+     * testUserTopic 测试
+     * @return
+     */
     public Result testUserTopic() {
         User user = new User();
         user.setUserAge(18);
@@ -107,6 +117,10 @@ public class ProducerServiceImpl implements ProducerService {
     }
 
 
+    /***
+     *  testUserTopicByWithPayload 测试
+     * @return
+     */
     public Result testUserTopicByWithPayload() {
         User user = new User();
         user.setUserAge(18);
@@ -119,6 +133,10 @@ public class ProducerServiceImpl implements ProducerService {
     }
 
 
+    /***
+     *  testSpringTopicByExtRocketMQTemplate 测试
+     * @return
+     */
     public Result testSpringTopicByExtRocketMQTemplate() {
 
         Message<byte[]> message = MessageBuilder.withPayload("Hello,World 2023!".getBytes()).build();
@@ -130,6 +148,11 @@ public class ProducerServiceImpl implements ProducerService {
         return Result.ok();
     }
 
+
+    /***
+     *  testSpringTopicByWithpload 测试
+     * @return
+     */
     public Result testSpringTopicByWithpload() {
 
         Message<byte[]> message = MessageBuilder.withPayload("Hello,World! I'm from spring message".getBytes()).build();
@@ -140,6 +163,13 @@ public class ProducerServiceImpl implements ProducerService {
 
         return Result.ok();
     }
+
+
+    /**
+     * asyncSend 测试
+     *
+     * @return
+     */
 
     public Result asyncSend() {
 
@@ -157,6 +187,29 @@ public class ProducerServiceImpl implements ProducerService {
             }
         });
 
+        return Result.ok();
+    }
+
+
+    /***
+     *convertAndSendByMsgExtTopic 测试
+     * @return
+     */
+    public Result convertAndSendByMsgExtTopic() {
+        rocketMQTemplate.convertAndSend(msgExtTopic + ": tag0", "I'm from tag0");
+        logger.info("syncSend topic:{},tag:{}", msgExtTopic, "tag0");
+        return Result.ok();
+    }
+
+
+    /***
+     * convertAndSendByMsgExtTopicTag1 测试
+     * @return
+     */
+    public Result convertAndSendByMsgExtTopicTag1() {
+
+        rocketMQTemplate.convertAndSend(msgExtTopic + ":tag1", "I'm from tag1");
+        logger.info("syncSend topic:{},tag:{}", msgExtTopic, "tag1");
         return Result.ok();
     }
 
