@@ -95,6 +95,7 @@ public class ProducerServiceImpl implements ProducerService {
 
         testRocketMQTemplateTransaction();
 
+        testExtRocketMQTemplateTransaction();
 
         return null;
     }
@@ -283,6 +284,24 @@ public class ProducerServiceImpl implements ProducerService {
             } catch (Exception e) {
                 logger.error("异常信息为:{}", e.getMessage());
             }
+        }
+        return Result.ok();
+    }
+
+    public Result testExtRocketMQTemplateTransaction() {
+        for (int i = 0; i < 10; i++) {
+            try {
+
+                Message msg = MessageBuilder.withPayload("extRocketMQTemplate transactional message" + i).setHeader(RocketMQHeaders.TRANSACTION_ID, "KEY_" + i).build();
+
+                SendResult sendResult = extRocketMQTemplate.sendMessageInTransaction(springTransTopic, msg, null);
+                logger.info("testExtRocketMQTemplateTransaction 发送事务消息 body:{},发送结果sendResult:{}", msg.getPayload(), JSON.toJSONString(sendResult.getSendStatus()));
+
+                Thread.sleep(10);
+            } catch (Exception e) {
+                logger.error("方法testExtRocketMQTemplateTransaction中 消息发送异常,异常信息为:{}", e.getMessage());
+            }
+
         }
         return Result.ok();
     }
