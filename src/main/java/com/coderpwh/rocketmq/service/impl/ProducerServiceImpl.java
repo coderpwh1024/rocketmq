@@ -93,6 +93,8 @@ public class ProducerServiceImpl implements ProducerService {
 
         testSendBatchMessageOrderly();
 
+        testRocketMQTemplateTransaction();
+
 
         return null;
     }
@@ -260,6 +262,28 @@ public class ProducerServiceImpl implements ProducerService {
             logger.info("Batch messages orderly to queue:{},发送结果为:{}", sendResult.getMessageQueue().getQueueId(), JSON.toJSONString(sendResult));
         }
 
+        return Result.ok();
+    }
+
+
+    /**
+     * testRocketMQTemplateTransaction 测试
+     *
+     * @return
+     */
+    public Result testRocketMQTemplateTransaction() {
+        String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
+
+        for (int i = 0; i < 10; i++) {
+            try {
+                Message msg = MessageBuilder.withPayload("rocketMQTemplate transactional message" + i).setHeader(RocketMQHeaders.TRANSACTION_ID, "KEY_" + i).build();
+                SendResult sendResult = rocketMQTemplate.sendMessageInTransaction(springTopic + ":" + tags[i % tags.length], msg, null);
+                logger.info("rocketMQTemplate send Transactional msg body:{},sendResult:{}", msg.getPayload(), sendResult.getSendStatus());
+                Thread.sleep(10);
+            } catch (Exception e) {
+                logger.error("异常信息为:{}", e.getMessage());
+            }
+        }
         return Result.ok();
     }
 
