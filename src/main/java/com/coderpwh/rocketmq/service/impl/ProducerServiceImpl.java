@@ -51,9 +51,12 @@ public class ProducerServiceImpl implements ProducerService {
     @Value("${demo.rocketmq.msgExtTopic}")
     private String msgExtTopic;
 
-
     @Value("${demo.rocketmq.bytesRequestTopic}")
     private String stringRequestTopic;
+
+
+    @Value("${demo.rocketmq.bytesRequestTopic}")
+    private String bytesRequestTopic;
 
 
     @Value("${demo.rocketmq.objectRequestTopic}")
@@ -96,6 +99,12 @@ public class ProducerServiceImpl implements ProducerService {
         testRocketMQTemplateTransaction();
 
         testExtRocketMQTemplateTransaction();
+
+        testStringRequestTopic();
+
+        testBytesRequestTopic();
+
+        testObjectRequestTopic();
 
         return null;
     }
@@ -291,9 +300,7 @@ public class ProducerServiceImpl implements ProducerService {
     public Result testExtRocketMQTemplateTransaction() {
         for (int i = 0; i < 10; i++) {
             try {
-
                 Message msg = MessageBuilder.withPayload("extRocketMQTemplate transactional message" + i).setHeader(RocketMQHeaders.TRANSACTION_ID, "KEY_" + i).build();
-
                 SendResult sendResult = extRocketMQTemplate.sendMessageInTransaction(springTransTopic, msg, null);
                 logger.info("testExtRocketMQTemplateTransaction 发送事务消息 body:{},发送结果sendResult:{}", msg.getPayload(), JSON.toJSONString(sendResult.getSendStatus()));
 
@@ -301,8 +308,52 @@ public class ProducerServiceImpl implements ProducerService {
             } catch (Exception e) {
                 logger.error("方法testExtRocketMQTemplateTransaction中 消息发送异常,异常信息为:{}", e.getMessage());
             }
-
         }
+        return Result.ok();
+    }
+
+
+    /***
+     *  testStringRequestTopic 测试
+     * @return
+     */
+    public Result testStringRequestTopic() {
+
+        String replyString = rocketMQTemplate.sendAndReceive(stringRequestTopic, "request string", String.class);
+
+        logger.info("发送内容:{},发送结果:{}", "request string", replyString);
+
+        return Result.ok();
+    }
+
+
+    /***
+     *  testBytesRequestTopic 测试
+     * @return
+     */
+    public Result testBytesRequestTopic() {
+        Message<String> message = MessageBuilder.withPayload("request byte[]").build();
+
+        byte[] replyBytes = rocketMQTemplate.sendAndReceive(bytesRequestTopic, message, byte[].class, 3000);
+        logger.info("发送内容:{},发送结果为:{}", "request byte[]", new String(replyBytes));
+
+        return Result.ok();
+    }
+
+
+    /***
+     *  testObjectRequestTopic 测试
+     * @return
+     */
+    public Result testObjectRequestTopic() {
+
+        User requestUser = new User();
+        requestUser.setUserAge(9);
+        requestUser.setUserName("requestUserName");
+
+        User replyUser = rocketMQTemplate.sendAndReceive(objectRequestTopic, requestUser, User.class, "order-id");
+        logger.info("发送消息为:{},接收消息为:{}", JSON.toJSONString(requestUser), JSON.toJSONString(replyUser));
+
         return Result.ok();
     }
 
