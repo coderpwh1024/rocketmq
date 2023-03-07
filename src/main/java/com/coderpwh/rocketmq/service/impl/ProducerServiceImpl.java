@@ -1,14 +1,16 @@
 package com.coderpwh.rocketmq.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.coderpwh.rocketmq.domain.OrderPaidEvent;
+import com.coderpwh.rocketmq.domain.ProductWithPayload;
 import com.coderpwh.rocketmq.domain.User;
 import com.coderpwh.rocketmq.mq.boot.producer.ExtRocketMQTemplate;
 import com.coderpwh.rocketmq.service.ProducerService;
 import com.coderpwh.rocketmq.util.Result;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.spring.core.RocketMQLocalRequestCallback;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.slf4j.Logger;
@@ -105,6 +107,10 @@ public class ProducerServiceImpl implements ProducerService {
         testBytesRequestTopic();
 
         testObjectRequestTopic();
+
+        testGenericRequestTopic();
+
+        testStringRequestTopicBySendAndReceive();
 
         return null;
     }
@@ -353,6 +359,46 @@ public class ProducerServiceImpl implements ProducerService {
 
         User replyUser = rocketMQTemplate.sendAndReceive(objectRequestTopic, requestUser, User.class, "order-id");
         logger.info("发送消息为:{},接收消息为:{}", JSON.toJSONString(requestUser), JSON.toJSONString(replyUser));
+
+        return Result.ok();
+    }
+
+
+    /***
+     *   testGenericRequestTopic 测试
+     * @return
+     */
+    public Result testGenericRequestTopic() {
+        String content = "request generic";
+
+        ProductWithPayload<String> replyGenericObject = rocketMQTemplate.sendAndReceive(genericRequestTopic, content, new TypeReference<ProductWithPayload<String>>() {
+        }.getType(), 30000, 2);
+
+        logger.info("发送内容:{},发送结果为:{}", content, replyGenericObject);
+
+        return Result.ok();
+    }
+
+
+    /***
+     * testStringRequestTopicBySendAndReceive
+     * @return
+     */
+    public Result testStringRequestTopicBySendAndReceive() {
+
+        String content = "request string";
+
+        rocketMQTemplate.sendAndReceive(stringRequestTopic, content, new RocketMQLocalRequestCallback() {
+            @Override
+            public void onSuccess(Object obj) {
+                logger.info("发送内容:{},接收消息为:{}", JSON.toJSONString(content), JSON.toJSONString(obj));
+            }
+
+            @Override
+            public void onException(Throwable throwable) {
+                logger.error("异常信息为:{}", throwable.getMessage());
+            }
+        });
 
         return Result.ok();
     }
