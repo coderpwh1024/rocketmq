@@ -10,6 +10,7 @@ import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,8 @@ import org.springframework.util.MimeTypeUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author coderpwh
@@ -212,6 +215,26 @@ public class ProducerServiceImpl implements ProducerService {
         logger.info("syncSend topic:{},tag:{}", msgExtTopic, "tag1");
         return Result.ok();
     }
+
+
+    /***
+     *  testBatchMessages测试
+     * @return
+     */
+    public Result testBatchMessages() {
+        List<Message> msgs = new ArrayList<>();
+        String str = "Hello RocketMQ Batch Msg#";
+
+        for (int i = 0; i < 10; i++) {
+            str = str + i;
+            Message mssage = MessageBuilder.withPayload(str).setHeader(RocketMQHeaders.KEYS, "KEY_" + i).build();
+            msgs.add(mssage);
+        }
+        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, msgs, 60000);
+        logger.info("Batch messages send result:{}", JSON.toJSONString(sendResult));
+        return Result.ok();
+    }
+
 
 
 }
