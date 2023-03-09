@@ -30,7 +30,6 @@ public class TransactionListenerImpl implements RocketMQLocalTransactionListener
     /***
      *  执行事务
      * @param message
-     * @param o
      * @return
      */
 
@@ -69,7 +68,28 @@ public class TransactionListenerImpl implements RocketMQLocalTransactionListener
      */
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message message) {
-        return null;
+
+        String transactionId = (String) message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
+
+        RocketMQLocalTransactionState retState = RocketMQLocalTransactionState.COMMIT;
+
+        Integer status = localTrans.get(transactionId);
+
+        if (null != status) {
+            switch (status) {
+                case 0:
+                    retState = RocketMQLocalTransactionState.COMMIT;
+                    break;
+                case 1:
+                    retState = RocketMQLocalTransactionState.ROLLBACK;
+                    break;
+                case 2:
+                    retState = RocketMQLocalTransactionState.UNKNOWN;
+                    break;
+            }
+        }
+        logger.info("检查事务,事务id为:{},事务状态为:{},状态为:{}", transactionId, retState, status);
+        return retState;
     }
 
 }
