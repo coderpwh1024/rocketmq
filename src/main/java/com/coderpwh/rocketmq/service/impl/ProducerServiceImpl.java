@@ -78,11 +78,11 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public Result testProducer() {
-        testSpringTopic();
+//        testSpringTopic();
 
-        testUserTopic();
+//        testUserTopic();
 
-        testUserTopicByWithPayload();
+       /* testUserTopicByWithPayload();
 
         testSpringTopicByExtRocketMQTemplate();
 
@@ -112,7 +112,7 @@ public class ProducerServiceImpl implements ProducerService {
 
         testStringRequestTopicBySendAndReceive();
 
-        testObjectRequestTopicBySendAndReceive();
+        testObjectRequestTopicBySendAndReceive();*/
 
         return Result.ok();
     }
