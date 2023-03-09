@@ -2,6 +2,7 @@ package com.coderpwh.rocketmq.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.coderpwh.rocketmq.mq.producer.AsyncRequestProducer;
+import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
@@ -18,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author coderpwh
  * @date 2023/3/8 14:38
  */
+@RocketMQTransactionListener
 public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
 
     private static Logger logger = LoggerFactory.getLogger(TransactionListenerImpl.class);
