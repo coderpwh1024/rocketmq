@@ -11,7 +11,7 @@ import org.springframework.messaging.Message;
  * @author coderpwh
  * @date 2023/3/9 15:07
  */
-@RocketMQTransactionListener(rocketMQTemplateBeanName = "exRocketMQTemplate")
+@RocketMQTransactionListener(rocketMQTemplateBeanName = "extRocketMQTemplate")
 public class ExtTransactionListenerImpl implements RocketMQLocalTransactionListener {
 
 

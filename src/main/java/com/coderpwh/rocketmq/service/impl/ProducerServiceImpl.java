@@ -114,7 +114,7 @@ public class ProducerServiceImpl implements ProducerService {
 
         testObjectRequestTopicBySendAndReceive();
 
-        return null;
+        return Result.ok();
     }
 
 

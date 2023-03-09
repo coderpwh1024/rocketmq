@@ -1,7 +1,6 @@
 package com.coderpwh.rocketmq.listener;
 
 import com.alibaba.fastjson.JSON;
-import com.coderpwh.rocketmq.mq.producer.AsyncRequestProducer;
 import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
