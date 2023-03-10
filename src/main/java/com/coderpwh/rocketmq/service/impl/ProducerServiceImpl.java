@@ -88,13 +88,15 @@ public class ProducerServiceImpl implements ProducerService {
 
 //       testSpringTopicByWithpload();
 
-        asyncSend();
+//        asyncSend();
 
-        /*   convertAndSendByMsgExtTopic();
+
+        // TODO  test 未消费
+//        convertAndSendByMsgExtTopic();
 
         convertAndSendByMsgExtTopicTag1();
 
-        testBatchMessages();
+        /*testBatchMessages();
 
         testSendBatchMessageOrderly();
 

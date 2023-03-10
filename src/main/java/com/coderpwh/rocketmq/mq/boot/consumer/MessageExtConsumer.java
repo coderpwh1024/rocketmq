@@ -24,7 +24,7 @@ public class MessageExtConsumer implements RocketMQListener<MessageExt>, RocketM
 
     @Override
     public void onMessage(MessageExt messageExt) {
-        logger.info("接收消息id为:{},消息内容为:{}", messageExt.getMsgId(), JSON.toJSONString(messageExt.getBody()));
+        logger.info("MessageExtConsumer,接收消息id为:{},消息内容为:{}", messageExt.getMsgId(), JSON.toJSONString(messageExt.getBody()));
     }
 
 
