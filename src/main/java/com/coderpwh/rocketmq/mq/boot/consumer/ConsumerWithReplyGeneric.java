@@ -17,7 +17,6 @@ public class ConsumerWithReplyGeneric implements RocketMQReplyListener<String, P
 
     private static Logger logger = LoggerFactory.getLogger(ConsumerWithReplyGeneric.class);
 
-
     @Override
     public ProductWithPayload<String> onMessage(String s) {
         logger.info("ConsumerWithReplyGeneric 接收消息内容为:{}", s);
