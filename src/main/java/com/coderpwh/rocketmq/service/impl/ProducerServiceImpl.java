@@ -104,15 +104,18 @@ public class ProducerServiceImpl implements ProducerService {
 
 //        testStringRequestTopic();
 
+
+        // TODO 测试未通过
 //        testBytesRequestTopic();
+        //  TODO 测试未通过
+//        testObjectRequestTopic();
 
-        testObjectRequestTopic();
+        //  TODO 测试未通过
+//        testGenericRequestTopic();
 
-      /*  testGenericRequestTopic();
+//        testStringRequestTopicBySendAndReceive();
 
-        testStringRequestTopicBySendAndReceive();
-
-        testObjectRequestTopicBySendAndReceive();*/
+        testObjectRequestTopicBySendAndReceive();
 
         return Result.ok();
     }
