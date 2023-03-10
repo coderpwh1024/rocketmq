@@ -13,5 +13,11 @@ public class ProductWithPayload<T> {
 
     private T payload;
 
+    public ProductWithPayload() {
+    }
 
+    public ProductWithPayload(String productName, T payload) {
+        this.productName = productName;
+        this.payload = payload;
+    }
 }
