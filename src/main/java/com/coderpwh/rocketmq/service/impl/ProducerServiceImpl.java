@@ -115,7 +115,7 @@ public class ProducerServiceImpl implements ProducerService {
 
 //        testStringRequestTopicBySendAndReceive();
 
-        testObjectRequestTopicBySendAndReceive();
+//        testObjectRequestTopicBySendAndReceive();
 
         return Result.ok();
     }
@@ -378,7 +378,7 @@ public class ProducerServiceImpl implements ProducerService {
         String content = "request generic";
 
         ProductWithPayload<String> replyGenericObject = rocketMQTemplate.sendAndReceive(genericRequestTopic, content, new TypeReference<ProductWithPayload<String>>() {
-        }.getType(), 30000, 2);
+        }.getType(), 60000, 2);
 
         logger.info("发送内容:{},发送结果为:{}", content, replyGenericObject);
 
