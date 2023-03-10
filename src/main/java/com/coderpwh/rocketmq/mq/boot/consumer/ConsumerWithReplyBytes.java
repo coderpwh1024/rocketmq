@@ -22,7 +22,7 @@ public class ConsumerWithReplyBytes implements RocketMQReplyListener<MessageExt,
     @Override
     public byte[] onMessage(MessageExt messageExt) {
         String str = "reply message content";
-        logger.info("ConsumerWithReplyBytes 接收到消息为:{}", JSON.toJSONString(messageExt));
+        logger.info("ConsumerWithReplyBytes 接收到消息为:{}",messageExt);
 
         return str.getBytes();
     }

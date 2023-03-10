@@ -90,27 +90,25 @@ public class ProducerServiceImpl implements ProducerService {
 
 //        asyncSend();
 
-
-        // TODO  test 未消费
 //        convertAndSendByMsgExtTopic();
 
-        convertAndSendByMsgExtTopicTag1();
+//        convertAndSendByMsgExtTopicTag1();
 
-        /*testBatchMessages();
+//        testBatchMessages();
 
-        testSendBatchMessageOrderly();
+//        testSendBatchMessageOrderly();
 
-        testRocketMQTemplateTransaction();
+//         testRocketMQTemplateTransaction();
 
-        testExtRocketMQTemplateTransaction();
+//       testExtRocketMQTemplateTransaction();
 
-        testStringRequestTopic();
+//        testStringRequestTopic();
 
-        testBytesRequestTopic();
+//        testBytesRequestTopic();
 
         testObjectRequestTopic();
 
-        testGenericRequestTopic();
+      /*  testGenericRequestTopic();
 
         testStringRequestTopicBySendAndReceive();
 
@@ -225,7 +223,7 @@ public class ProducerServiceImpl implements ProducerService {
      * @return
      */
     public Result convertAndSendByMsgExtTopic() {
-        rocketMQTemplate.convertAndSend(msgExtTopic + ": tag0", "I'm from tag0");
+        rocketMQTemplate.convertAndSend(msgExtTopic + ":tag0", "I'm from tag0");
         logger.info("syncSend topic:{},tag:{}", msgExtTopic, "tag0");
         return Result.ok();
     }
@@ -344,7 +342,8 @@ public class ProducerServiceImpl implements ProducerService {
     public Result testBytesRequestTopic() {
         Message<String> message = MessageBuilder.withPayload("request byte[]").build();
 
-        byte[] replyBytes = rocketMQTemplate.sendAndReceive(bytesRequestTopic, message, byte[].class, 3000);
+//        byte[] replyBytes = rocketMQTemplate.sendAndReceive(bytesRequestTopic, message, byte[].class, 30);
+        byte[] replyBytes = rocketMQTemplate.sendAndReceive(bytesRequestTopic, MessageBuilder.withPayload("request byte[]").build(), byte[].class);
         logger.info("发送内容:{},发送结果为:{}", "request byte[]", new String(replyBytes));
 
         return Result.ok();
