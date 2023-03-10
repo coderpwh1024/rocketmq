@@ -82,15 +82,15 @@ public class ProducerServiceImpl implements ProducerService {
 
 //        testUserTopic();
 
-       /* testUserTopicByWithPayload();
+//        testUserTopicByWithPayload();
 
-        testSpringTopicByExtRocketMQTemplate();
+//        testSpringTopicByExtRocketMQTemplate();
 
-        testSpringTopicByWithpload();
+//       testSpringTopicByWithpload();
 
         asyncSend();
 
-        convertAndSendByMsgExtTopic();
+        /*   convertAndSendByMsgExtTopic();
 
         convertAndSendByMsgExtTopicTag1();
 
@@ -150,7 +150,7 @@ public class ProducerServiceImpl implements ProducerService {
      */
     public Result testUserTopicByWithPayload() {
         User user = new User();
-        user.setUserAge(18);
+        user.setUserAge(20);
         user.setUserName("coderpwh");
         Message<User> message = MessageBuilder.withPayload(user).setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON_VALUE).build();
 

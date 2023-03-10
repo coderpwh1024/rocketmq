@@ -20,7 +20,7 @@ public class OrderPaidEventConsumer implements RocketMQListener<OrderPaidEvent> 
 
     @Override
     public void onMessage(OrderPaidEvent orderPaidEvent) {
-        logger.info("订单id为:{},订单信息为:{}", orderPaidEvent.getOrderId(), JSON.toJSONString(orderPaidEvent));
+        logger.info("OrderPaidEventConsumer 接收消息,订单id为:{},订单信息为:{}", orderPaidEvent.getOrderId(), JSON.toJSONString(orderPaidEvent));
     }
 
 }

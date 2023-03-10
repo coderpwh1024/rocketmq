@@ -16,6 +16,9 @@ public class OrderPaidEvent implements Serializable {
 
     private BigDecimal paidMoney;
 
+    public OrderPaidEvent() {
+    }
+
     public OrderPaidEvent(String orderId, BigDecimal paidMoney) {
         this.orderId = orderId;
         this.paidMoney = paidMoney;
