@@ -57,9 +57,9 @@ public class AclProducerServiceImpl implements AclProducerService {
         } catch (Exception e) {
             logger.error("testTransaction方法 发送事务消息异常,异常消息为:{}", e.getMessage());
         }
-
-
     }
+
+
 
 
 }

@@ -79,13 +79,19 @@ public class TransactionListenerImpl implements RocketMQLocalTransactionListener
         if (null != status) {
             switch (status) {
                 case 0:
-                    retState = RocketMQLocalTransactionState.COMMIT;
+//                    retState = RocketMQLocalTransactionState.COMMIT;
+                    // ACL 时
+                    retState = RocketMQLocalTransactionState.UNKNOWN;
                     break;
                 case 1:
-                    retState = RocketMQLocalTransactionState.ROLLBACK;
+//                    retState = RocketMQLocalTransactionState.ROLLBACK;
+                    // ACL 时
+                    retState = RocketMQLocalTransactionState.COMMIT;
                     break;
                 case 2:
-                    retState = RocketMQLocalTransactionState.UNKNOWN;
+//                    retState = RocketMQLocalTransactionState.UNKNOWN;
+                    // ACL 时
+                    retState = RocketMQLocalTransactionState.COMMIT;
                     break;
             }
         }
