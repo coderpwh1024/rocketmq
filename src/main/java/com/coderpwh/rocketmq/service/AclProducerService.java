@@ -4,19 +4,14 @@ import com.coderpwh.rocketmq.util.Result;
 
 /**
  * @author coderpwh
- * @date 2023/3/6 16:30
+ * @date 2023/3/13 10:51
  */
-public interface ProducerService {
+public interface AclProducerService {
 
 
     /***
-     * 生产者
+     *  acl
      * @return
      */
-    Result testProducer();
-
-
-
-
-
+    Result testAclProducer();
 }

@@ -1,5 +1,6 @@
 package com.coderpwh.rocketmq.controller;
 
+import com.coderpwh.rocketmq.service.AclProducerService;
 import com.coderpwh.rocketmq.service.ProducerService;
 import com.coderpwh.rocketmq.service.SendService;
 import com.coderpwh.rocketmq.util.Result;
@@ -26,6 +27,10 @@ public class SendMqController {
     private ProducerService producerService;
 
 
+    @Resource
+    private AclProducerService aclProducerService;
+
+
     /***
      *  mq简单示例
      * @return
@@ -39,6 +44,11 @@ public class SendMqController {
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public Result testProducer() {
         return producerService.testProducer();
+    }
+
+    @RequestMapping(value = "/acl_test", method = RequestMethod.POST)
+    public Result testAcl() {
+        return aclProducerService.testAclProducer();
     }
 
 
