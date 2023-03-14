@@ -37,18 +37,30 @@ public class AclProducerServiceImpl implements AclProducerService {
     private String springTopic;
 
     @Override
-
     public Result testAclProducer() {
-        return null;
+
+//        testSpringTopic();
+
+//        testSpringTopicByPayload();
+
+        testTransaction();
+
+        return Result.ok();
     }
 
 
+    /***
+     *  testSpringTopic
+     */
     public void testSpringTopic() {
         SendResult sendResult = rocketMQTemplate.syncSend(springTopic + ":acl", "Hello,ACL Msg!");
         logger.info("topic:{},发送结果为：{}", springTopic, JSON.toJSONString(sendResult));
     }
 
 
+    /***
+     * testSpringTopicByPayload
+     */
     public void testSpringTopicByPayload() {
         Message<String> message = MessageBuilder.withPayload("Hello, World! I'm from spring message & ACL Msg").build();
 
@@ -58,6 +70,9 @@ public class AclProducerServiceImpl implements AclProducerService {
     }
 
 
+    /***
+     * testTransaction
+     */
     public void testTransaction() {
         String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
 

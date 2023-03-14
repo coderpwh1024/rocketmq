@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @date 2023/3/13 11:35
  */
 @Service
-@RocketMQMessageListener(topic = "${demo.rocketmq.normal.topic}", consumerGroup = "group_define_in_cloud_MQ")
+@RocketMQMessageListener(topic = "normal_topic_define_in_cloud_MQ", consumerGroup = "group_define_in_cloud_MQ")
 public class AclStringConsumer implements RocketMQListener<String> {
 
     private static Logger logger = LoggerFactory.getLogger(AclStringConsumer.class);
