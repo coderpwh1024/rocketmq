@@ -1,5 +1,6 @@
 package com.coderpwh.rocketmq.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.coderpwh.rocketmq.service.AclProducerService;
 import com.coderpwh.rocketmq.util.Result;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -42,6 +43,21 @@ public class AclProducerServiceImpl implements AclProducerService {
     }
 
 
+    public void testSpringTopic() {
+        SendResult sendResult = rocketMQTemplate.syncSend(springTopic + ":acl", "Hello,ACL Msg!");
+        logger.info("topic:{},发送结果为：{}", springTopic, JSON.toJSONString(sendResult));
+    }
+
+
+    public void testSpringTopicByPayload() {
+        Message<String> message = MessageBuilder.withPayload("Hello, World! I'm from spring message & ACL Msg").build();
+
+        SendResult sendResult = rocketMQTemplate.syncSend(springTopic, message);
+        logger.info("testSpringTopicByPayload方法中 topic:{},发送结果为:{}", springTopic, JSON.toJSONString(sendResult));
+
+    }
+
+
     public void testTransaction() {
         String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD", "TagE"};
 
@@ -58,8 +74,6 @@ public class AclProducerServiceImpl implements AclProducerService {
             logger.error("testTransaction方法 发送事务消息异常,异常消息为:{}", e.getMessage());
         }
     }
-
-
 
 
 }
