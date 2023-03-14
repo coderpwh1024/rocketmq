@@ -98,6 +98,17 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/log/logback-dev.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

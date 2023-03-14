@@ -12,7 +12,8 @@
     <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 文件路径 ，注意LOG_PATH是默认值，
             它的配置对应application.properties里的logging.path值-->
-      <!--  <file>${LOG_PATH}/info/info.log</file>-->
+      <!--  <file>${LOG_PATH}/info/info.log</file> -->
+        <file>/info/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
             <fileNamePattern>info/info-%d{yyyy-MM-dd}.log
@@ -35,6 +36,7 @@
         <!-- 文件路径 ，注意LOG_PATH是默认值，
             它的配置对应application.properties里的logging.path值-->
         <!--<file>${LOG_PATH}/debug/debug.log</file>-->
+        <file>/debug/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 文件名称 -->
             <fileNamePattern>debug/debug-%d{yyyy-MM-dd}.log</fileNamePattern>
